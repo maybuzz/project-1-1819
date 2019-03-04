@@ -1,0 +1,25 @@
+{
+  "name": "project-1-1819",
+  "version": "1.0.0",
+  "description": "## Zoek in de de collectie van de OBA",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maybuzz/project-1-1819.git"
+  },
+  "author": "Luna May Johasson @maybuzz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maybuzz/project-1-1819/issues"
+  },
+  "homepage": "https://github.com/maybuzz/project-1-1819#readme",
+  "dependencies": {
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "node": "^10.15.2",
+    "oba-wrapper": "github:maanlamp/OBA-wrapper"
+  }
+}
