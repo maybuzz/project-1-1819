@@ -2,10 +2,57 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <script src="./js/api.js" type="module"></script>
+    <title>OBA - Mijn omgeving</title>
+    <link rel="stylesheet" href="src/css/styles.css">
   </head>
   <body>
+    <header>
+      <ul class="menu menu__top">
+        <li><a href="#"><h1>logo</h1></a></li>
+        <li><a href="#">mijn lijst</a></li>
+      </ul>
+    </header>
 
+    <nav class="menu__side__container">
+      <ul class="menu menu__side">
+        <li><a href="#">Zoeken</a></li>
+        <li><a href="#">Boeken</a></li>
+        <li><a href="#">Muziek</a></li>
+        <li><a href="#">Agenda</a></li>
+        <li><a href="#">Locatie</a></li>
+      </ul>
+    </nav>
+
+    <div class="container__header">
+      <h1>Welkom in jouw OBA omgeving!</h1>
+      <ul class="menu menu__search">
+        <li><a href="#">Boeken</a></li>
+        <li><a href="#">Muziek</a></li>
+        <li><a href="#">Activiteiten</a></li>
+      </ul>
+
+      <form class="form__search" method="post">
+        <label for="bar">Zoeken...</label>
+        <input id="bar" type="text">
+        <input type="submit">
+      </form>
+    </div>
+
+    <div class="container__books">
+      <h2>Mijn bibliotheek</h2>
+      <a href="#">zoek een boek</a>
+    </div>
+
+    <div class="container__music">
+      <h2>Mijn muziek</h2>
+      <a href="#">zoek muziek</a>
+    </div>
+
+    <div class="container__music">
+      <h2>Mijn agenda</h2>
+      <a href="#">zoek activiteiten</a>
+    </div>
+
+    <script src="src/js/script.js" type="module"></script>
   </body>
 </html>

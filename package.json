@@ -18,7 +18,6 @@
   "homepage": "https://github.com/maybuzz/project-1-1819#readme",
   "dependencies": {
     "dotenv": "^6.2.0",
-    "express": "^4.16.4",
     "node": "^10.15.2",
     "oba-wrapper": "github:maanlamp/OBA-wrapper"
   }
