@@ -16,9 +16,11 @@ const app = {
   },
   initBooks: () => {
     clear.clearCourses()
+    clear.clearBooks()
     api.getBooks()
   },
   initCourses: () => {
+    clear.clearCourses()
     clear.clearBooks()
     api.getCourse()
   }
@@ -26,13 +28,22 @@ const app = {
 
 const api = {
   getBooks: async () => {
+    console.log("dutch")
+
     if (localStorage.getItem('books')) {
       render.onload()
       return render.listBooks()
     }
+
     render.onload()
+
     const oba = new API()
-    const bookStream = await oba.createStream("search/for+dummies&facet=type(book)&facet=language(dut)&librarian=true{10}")
+    const bookStream = await oba.createStream("search/for+dummies&facet=type(book)&facet=language(dut)&librarian=true{100}")
+
+    // const engBtn = document.getElementById('engBtn')
+    //
+    // engBtn.onclick = api.getEng()
+
     bookStream
       .pipe(data.formatBooks)
       .pipe(render.listBooks)
@@ -43,12 +54,25 @@ const api = {
     }
     render.onload()
     const oba = new API()
-    const courseStream = await oba.createStream("search/*&facet=type(Cursus)&librarian=true{10}")
+    const courseStream = await oba.createStream("search/*&facet=type(Cursus)&librarian=true{100}")
     courseStream
       .pipe(data.formatCourse)
       .pipe(render.listCourse)
 
-    }
+    },
+  getEng: async () => {
+    console.log("engels")
+    const oba = new API()
+    const bookStream = await oba.createStream("search/for+dummies&facet=type(book)&facet=language(eng)&librarian=true{10}")
+
+    const dutBtn = document.getElementById('dutBtn')
+
+    dutBtn.onclick = api.getBooks
+
+    bookStream
+      .pipe(data.formatBooks)
+      .pipe(render.listBooks)
+  }
 }
 
 const data = {
@@ -61,9 +85,7 @@ const data = {
         title: book.titles.title._attributes['search-term'].split('voor')[0].trim(),
         cover: book.coverimages.coverimage[0] ? book.coverimages.coverimage[0]._text : 'https://v19.nbc.bibliotheek.nl/thumbnail?uri=http://data.bibliotheek.nl/ggc/ppn/417724462&token=c1322402',
         author: book.authors ? book.authors['main-author']._attributes['search-term'] : 'onbekend',
-        summary: book.summaries ? book.summaries.summary._text : 'Excuses, er is geen verdere informatie te vinden.',
-        language: book.languages ? book.languages.language._text : 'onbekend',
-        format: book.formats ? book.formats.format._text : 'onbekend',
+        summary: book.summaries ? book.summaries.summary._text : 'onbekend.',
         year: book.publication.year['_text']
       }
 
@@ -93,7 +115,7 @@ const data = {
             : course.coverimages.coverimage._text)
           : 'https://v19.nbc.bibliotheek.nl/thumbnail?uri=http://data.bibliotheek.nl/ggc/ppn/417724462&token=c1322402',
         summary: course.summaries ? course.summaries.summary._text : 'Excuses, er is geen verdere informatie te vinden.',
-        format: course.formats ? course.formats.format._text : 'onbekend'
+        link: course.eresources ? course.eresources.eresource._attributes.url : 'geen website'
       }
 
       allCourses.push(data)
@@ -144,15 +166,8 @@ const render = {
     const div1 = document.createElement('div')
           div1.setAttribute('class', 'container__books__side')
 
-    const dutBtn = document.createElement('a')
-          dutBtn.setAttribute('class', 'btn btn__lang')
-          dutBtn.setAttribute('href', '#')
-          dutBtn.textContent = 'nederlandstalig'
-
-    const engBtn = document.createElement('a')
-          engBtn.setAttribute('class', 'btn btn__lang')
-          engBtn.setAttribute('href', '#')
-          engBtn.textContent = 'engelstalig'
+    const divP = document.createElement('div')
+          divP.setAttribute('id', 'container__books-parent')
 
     const div2 = document.createElement('div')
           div2.setAttribute('id', 'container__books__content')
@@ -162,24 +177,27 @@ const render = {
           title1.textContent = 'Bibliotheek'
 
     const sub = document.createElement('p')
-          sub.textContent = 'hier vindt u alle "voor dummies" boeken binnen de oba.'
+          sub.textContent = 'Hier vindt u alle "voor dummies" boeken binnen de oba.'
 
           container1.appendChild(div1)
-          container1.appendChild(div2)
           div1.appendChild(title1)
           div1.appendChild(sub)
-          div1.appendChild(dutBtn)
-          div1.appendChild(engBtn)
+          container1.appendChild(divP)
+          divP.appendChild(div2)
+
+    const container2 = document.getElementById('container__books__content')
 
     return books.forEach((book) => {
-
-      const container2 = document.getElementById('container__books__content')
 
       const div3 = document.createElement('div')
             div3.setAttribute('class', 'container__book')
 
       const link = document.createElement('a')
             link.setAttribute('href', '#')
+            link.setAttribute('class', 'link__book')
+
+      const hold = document.createElement('div')
+            hold.setAttribute('class', 'holder')
 
       const cover = document.createElement('img')
             cover.setAttribute('src', book.cover)
@@ -188,10 +206,21 @@ const render = {
       const title = document.createElement('h3')
             title.textContent = book.title.split('for')[0].trim()
 
+      const author = document.createElement('p')
+            author.setAttribute('class', 'author')
+            author.textContent = book.author
+
+      const year = document.createElement('p')
+            year.setAttribute('class', 'year')
+            year.textContent = book.year
+
             container2.appendChild(div3)
             div3.appendChild(link)
-            link.appendChild(cover)
+            link.appendChild(hold)
+            hold.appendChild(cover)
             link.appendChild(title)
+            div3.appendChild(author)
+            div3.appendChild(year)
 
       })
   },
@@ -215,15 +244,8 @@ const render = {
     const div1 = document.createElement('div')
           div1.setAttribute('class', 'container__courses__side')
 
-    const dutBtn = document.createElement('a')
-          dutBtn.setAttribute('class', 'btn', 'btn__lang')
-          dutBtn.setAttribute('href', '#')
-          dutBtn.textContent = 'nederlandstalig'
-
-    const engBtn = document.createElement('a')
-          engBtn.setAttribute('class', 'btn', 'btn__lang')
-          engBtn.setAttribute('href', '#')
-          engBtn.textContent = 'engelstalig'
+    const divP = document.createElement('div')
+          divP.setAttribute('id', 'container__courses-parent')
 
     const div2 = document.createElement('div')
           div2.setAttribute('id', 'container__courses__content')
@@ -233,10 +255,11 @@ const render = {
           title1.textContent = 'Cursussen'
 
     const sub = document.createElement('p')
-          sub.textContent = 'hier vindt u alle cursussen binnen de oba.'
+          sub.textContent = 'Hier vindt u alle cursussen binnen de oba.'
 
           container1.appendChild(div1)
-          container1.appendChild(div2)
+          container1.appendChild(divP)
+          divP.appendChild(div2)
           div1.appendChild(title1)
           div1.appendChild(sub)
 
@@ -249,6 +272,10 @@ const render = {
 
       const link = document.createElement('a')
             link.setAttribute('href', '#')
+            link.setAttribute('class', 'link__course')
+
+      const hold = document.createElement('div')
+            hold.setAttribute('class', 'holderCourse')
 
       const cover = document.createElement('img')
             cover.setAttribute('src', course.cover)
@@ -257,10 +284,17 @@ const render = {
       const title = document.createElement('h3')
             title.textContent = course.title
 
+      const linkBtn = document.createElement('a')
+            linkBtn.setAttribute('class', 'btn')
+            linkBtn.setAttribute('href', course.link)
+            linkBtn.textContent = 'naar de website'
+
             container.appendChild(div)
             div.appendChild(link)
-            link.appendChild(cover)
+            link.appendChild(hold)
+            hold.appendChild(cover)
             link.appendChild(title)
+            div.appendChild(linkBtn)
 
       })
   },
@@ -293,7 +327,7 @@ const render = {
       document.getElementById('spinner').remove()
     }
 
-    const app = document.getElementById('error')
+    const app = document.getElementById('container__books')
 
     const section = document.createElement('section')
 
@@ -309,9 +343,6 @@ const render = {
           app.appendChild(section)
           section.appendChild(title)
           section.appendChild(text)
-  },
-  overview: () => {
-    console.log("hier komt shit");
   }
 }
 
