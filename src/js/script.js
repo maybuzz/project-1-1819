@@ -2,7 +2,7 @@
 // homepage ? of default boeken
 // taal knoppen fixen
 
-import { API } from '../../node_modules/oba-wrapper/js/index.js'
+import { API } from './wrapper/index.js'
 
 const app = {
   init: () => {
