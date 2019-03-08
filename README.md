@@ -36,18 +36,19 @@ I wanted to combine the two previous courses (css-to-the-rescue and web-app-from
 ## Features
 - 'library page' with all the dutch **"for dummies"** books
   - author and pubyear
-- 'courses page' -> with all the **courses**
+- 'courses page' with all the **courses**
   - link to the website to book the course
-- `textContent` -> to generate HTML
-- `async... await` -> to connect to  the API
-- `.createStream` and `.pipe` -> to handle the requests and send them to the right module
-- `?`, `:` -> to check the data coming from the api
-- `localStorage` -> to save all the data, saves time and unnecessarily APIcalls. Using prefixes to locate different items in storage.
 - `loading state`
 - `error state`
 
+- `textContent` to generate HTML
+- `async... await` to connect to  the API
+- `.createStream` and `.pipe` to handle the requests and send them to the right module
+- `localStorage` to save all the data, saves time and unnecessarily APIcalls. Using prefixes to locate different items in storage.
+- `?`, `:` to check the data coming from the API
+
 ## Code
-For this project [Wouter Lem](@maanlamp) wrote a wrapper to make working with the API would be a bit easier. At first this still was a bit confusing.
+For this project [Wouter Lem](https://github.com/maanlamp) wrote a wrapper to make working with the API would be a bit easier. At first this still was a bit confusing.
 
 This code shows my request to the API to collect all the books.
 
@@ -136,9 +137,12 @@ const data = {
 ## Resources
 - [Zoekmachine](https://zoeken.oba.nl/)   
 - [Wrapper](https://github.com/maanlamp/OBA-wrapper)   
+- [Daniel's readme, API docs](https://github.com/DanielvandeVelde/functional-programming)
 
 ## Credits
-[Wouter Lem](https://github.com/maanlamp) -> wrote the oba wrapper
+[Wouter Lem](https://github.com/maanlamp) -> wrote the oba wrapper   
+[Folker-Jan vd Pol](https://github.com/follywolly) -> helped me out a bit   
+[Daniel vd Velde](https://github.com/DanielvandeVelde) -> helped me too   
 
 ## License
 [MIT](LICENSE) © [Luna May Johansson](https://github.com/maybuzz)
