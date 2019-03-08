@@ -40,10 +40,6 @@ const api = {
     const oba = new API()
     const bookStream = await oba.createStream("search/for+dummies&facet=type(book)&facet=language(dut)&librarian=true{100}")
 
-    // const engBtn = document.getElementById('engBtn')
-    //
-    // engBtn.onclick = api.getEng()
-
     bookStream
       .pipe(data.formatBooks)
       .pipe(render.listBooks)
@@ -59,20 +55,7 @@ const api = {
       .pipe(data.formatCourse)
       .pipe(render.listCourse)
 
-    },
-  getEng: async () => {
-    console.log("engels")
-    const oba = new API()
-    const bookStream = await oba.createStream("search/for+dummies&facet=type(book)&facet=language(eng)&librarian=true{10}")
-
-    const dutBtn = document.getElementById('dutBtn')
-
-    dutBtn.onclick = api.getBooks
-
-    bookStream
-      .pipe(data.formatBooks)
-      .pipe(render.listBooks)
-  }
+    }
 }
 
 const data = {
@@ -345,7 +328,5 @@ const render = {
           section.appendChild(text)
   }
 }
-
-
 
 app.init()

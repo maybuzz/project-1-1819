@@ -80,7 +80,7 @@ img {
   margin-top: 1rem;
 }
 
-img:hover {
+.container__book:hover img, .container__course:hover img {
   box-shadow: -10px -8px 20px -4px rgba(148,148,148,1);
 }
 
