@@ -16,7 +16,7 @@ Oba (public library of Amsterdam) "for dummies". An environment for the "for dum
 - [Credits](#Credits)
 
 ## Live demo
-[Click here](...) to see my live demo.
+[Click here](https://maybuzz.github.io/project1/) to see my live demo.
 
 ## Install
 This project doesn't have ant dependencies. Fork this project and clone it using the terminal. Start a live-server on the src folder to open the application in your browser.
@@ -39,7 +39,7 @@ I wanted to combine the two previous courses (css-to-the-rescue and web-app-from
 - 'courses page' with all the **courses**
   - link to the website to book the course
 - `loading state`
-- `error state`
+- `error page`
 
 - `textContent` to generate HTML
 - `async... await` to connect to  the API

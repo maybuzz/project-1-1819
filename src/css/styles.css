@@ -46,6 +46,7 @@ main {
 h1, h2 {
   font-family: 'Cabin Sketch', sans-serif;
   margin: .5rem;
+  letter-spacing: .08rem;
 }
 
 h1 {
@@ -87,7 +88,7 @@ img {
 .container__header {
   grid-area: header;
   width: 80%;
-  margin-bottom: 6.5rem;
+  margin-bottom: 5rem;
 }
 
 /* general */
@@ -114,6 +115,10 @@ img {
 
 .container__course, .holderCourse img {
   width: 100%;
+}
+
+.holder img {
+  width: 7vw;
 }
 
 .summary, .author, .year, .summary__course, .container__course .btn {
@@ -181,10 +186,6 @@ img {
   display: none;
 }
 
-.holder img {
-  width: 7vw;
-}
-
 /* courses */
 .container__courses__content {
   grid-column: span 3;
@@ -243,14 +244,8 @@ a:hover, a:focus, .btn:hover, .btn:focus {
   margin-top: 5%;
 }
 
-#oba {
-  fill: var(--color-text-special);
-}
-
-#oba:hover {
-  fill: tomato;
-}
-
+/* letters */
+/* title */
 .v:hover, .r:hover {
   transform: rotate(45deg);
   display: inline-block;
@@ -276,12 +271,16 @@ a:hover, a:focus, .btn:hover, .btn:focus {
   display: inline-block;
 }
 
-.spin {
-  display: inline;
+/* bibliotheek */
+.b:hover, .ii:hover, .l:hover, .iii:hover, .ooo:hover, .t:hover, .h:hover, .ee:hover, .eee:hover, .k:hover {
+  transform: rotateY(-60deg);
+  display: inline-block;
 }
 
-.spin:hover {
-
+/* curcussen */
+.c:hover, .uu:hover, .rr:hover, .ss:hover, .uuu:hover, .sss:hover, .ssss:hover, .eeee:hover, .n:hover {
+  transform: rotateY(-60deg);
+  display: inline-block;
 }
 
 /* loading state */
@@ -330,14 +329,14 @@ a:hover, a:focus, .btn:hover, .btn:focus {
 }
 
 /* queries */
-@media (max-width: 60em) {
+@media (max-width: 58em) {
   main {
     grid-template-areas:
-    "nav nav nav"
     "header header header"
     "books books books";
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(2, auto);
     grid-template-rows: auto;
+    height: 100%;
   }
 
   h1 {
@@ -345,20 +344,97 @@ a:hover, a:focus, .btn:hover, .btn:focus {
     transition: font-size .2s ease-out;
   }
 
+  #container__books-parent, #container__courses-parent {
+    position: relative;
+    width: 90%;
+  }
+
+  #container__books-parent::after, #container__courses-parent::after, #container__books-parent::before, #container__courses-parent::before {
+    z-index: 1;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 1px;
+    bottom: 0;
+    width: 5%;
+    background: linear-gradient(to left, rgba(221, 221, 221, 1) 0%, rgba(221, 221, 221, 0) 100%);
+  }
+
+  #container__books-parent::before, #container__courses-parent::before {
+    left: -1px;
+    right: auto;
+    transform: rotate(180deg);
+    width: 5%;
+  }
+
+  .container__header {
+    margin-bottom: 2.5rem;
+  }
+
   .container__books, .container__courses {
     grid-area: books;
-    display: grid;
-    grid-template-columns: repeat(3, auto);
+    display: flex;
+    height: 100%;
+    overflow: hidden;
   }
 
   .container__books__content, .container__courses__content {
     grid-column: span 2;
+    display: flex ;
+    position: relative;
+    padding-left: 3rem;
+    overflow: scroll;
+
+  }
+
+  .container__book {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: 1fr, 2fr;
+    grid-row: auto;
+  }
+
+  .holder img {
+    grid-column: span 1;
   }
 
   .container__books__side, .container__courses__side {
     width: 85%;
+  }
+
+  /* letters */
+  /* title */
+  .v:hover, .r:hover, .o:hover, .u:hover, .i:hover, .oo:hover, .m:hover, .e:hover, .d:hover, .mm:hover, .s:hover {
+    transform: none;
+    display: inline;
+  }
+
+  /* bibliotheek */
+  .b:hover, .ii:hover, .l:hover, .iii:hover, .ooo:hover, .t:hover, .h:hover, .ee:hover, .eee:hover, .k:hover {
+    transform: none;
+    display: inline;
+  }
+
+  /* curcussen */
+  .c:hover, .uu:hover, .rr:hover, .ss:hover, .uuu:hover, .sss:hover, .ssss:hover, .eeee:hover, .n:hover {
+    transform: none;
+    display: inline;
+  }
+
+  .container__book:hover img, .container__course:hover img {
+    box-shadow: 0;
+  }
+
+  .summary, .author, .year, .summary__course, .container__course .btn {
+    display: inline-block;
+    font-size: .8rem;
+    text-align: left;
+
+  }
+
+  .container__book:hover .summary, .container__book:hover .author, .container__book:hover .year, .container__course:hover .summary__course, .container__course:hover .btn{
+    display: inline-block;
+    font-size: .8rem;
+    text-align: center;
   }
 }
 

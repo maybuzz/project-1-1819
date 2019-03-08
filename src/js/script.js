@@ -28,8 +28,6 @@ const app = {
 
 const api = {
   getBooks: async () => {
-    console.log("dutch")
-
     if (localStorage.getItem('books')) {
       render.onload()
       return render.listBooks()
@@ -89,7 +87,7 @@ const data = {
           ? (course.titles.title.length > 0
             ? course.titles.title[0]._text
             : course.titles.title._text)
-          : course.titles['short-title']._text,
+          : course.titles['short-title']._text.split(':')[0].trim(),
         cover: course.coverimages.coverimage
           ? (course.coverimages.coverimage.length > 0
             ? (course.coverimages.coverimage[1]
@@ -157,13 +155,68 @@ const render = {
           div2.setAttribute('class', 'container__books__content')
 
     const title1 = document.createElement('h2')
-          title1.textContent = 'Bibliotheek'
+
+    const b = document.createElement('span')
+          b.setAttribute('class', 'b')
+          b.textContent = 'B'
+
+    const i = document.createElement('span')
+          i.setAttribute('class', 'ii')
+          i.textContent = 'i'
+
+    const bb = document.createElement('span')
+          bb.setAttribute('class', 'bb')
+          bb.textContent = 'b'
+
+    const l = document.createElement('span')
+          l.setAttribute('class', 'l')
+          l.textContent = 'l'
+
+    const ii = document.createElement('span')
+          ii.setAttribute('class', 'iii')
+          ii.textContent = 'i'
+
+    const o = document.createElement('span')
+          o.setAttribute('class', 'ooo')
+          o.textContent = 'o'
+
+    const t = document.createElement('span')
+          t.setAttribute('class', 't')
+          t.textContent = 't'
+
+    const h = document.createElement('span')
+          h.setAttribute('class', 'h')
+          h.textContent = 'h'
+
+    const e = document.createElement('span')
+          e.setAttribute('class', 'ee')
+          e.textContent = 'e'
+
+    const ee = document.createElement('span')
+          ee.setAttribute('class', 'eee')
+          ee.textContent = 'e'
+
+    const k = document.createElement('span')
+          k.setAttribute('class', 'k')
+          k.textContent = 'k'
+
 
     const sub = document.createElement('p')
           sub.textContent = 'Hier vindt u alle "voor dummies" boeken binnen de oba.'
 
           container1.appendChild(div1)
           div1.appendChild(title1)
+          title1.appendChild(b)
+          title1.appendChild(i)
+          title1.appendChild(bb)
+          title1.appendChild(l)
+          title1.appendChild(ii)
+          title1.appendChild(o)
+          title1.appendChild(t)
+          title1.appendChild(h)
+          title1.appendChild(e)
+          title1.appendChild(ee)
+          title1.appendChild(k)
           div1.appendChild(sub)
           container1.appendChild(divP)
           divP.appendChild(div2)
@@ -235,7 +288,42 @@ const render = {
           div2.setAttribute('class', 'container__courses__content')
 
     const title1 = document.createElement('h2')
-          title1.textContent = 'Cursussen'
+
+    const c = document.createElement('span')
+          c.setAttribute('class', 'c')
+          c.textContent = 'C'
+
+    const u = document.createElement('span')
+          u.setAttribute('class', 'uu')
+          u.textContent = 'u'
+
+    const r = document.createElement('span')
+          r.setAttribute('class', 'rr')
+          r.textContent = 'r'
+
+    const s = document.createElement('span')
+          s.setAttribute('class', 'ss')
+          s.textContent = 's'
+
+    const uu = document.createElement('span')
+          uu.setAttribute('class', 'uuu')
+          uu.textContent = 'u'
+
+    const ss = document.createElement('span')
+          ss.setAttribute('class', 'sss')
+          ss.textContent = 's'
+
+    const sss = document.createElement('span')
+          sss.setAttribute('class', 'ssss')
+          sss.textContent = 's'
+
+    const e = document.createElement('span')
+          e.setAttribute('class', 'eeee')
+          e.textContent = 'e'
+
+    const n = document.createElement('span')
+          n.setAttribute('class', 'n')
+          n.textContent = 'n'
 
     const sub = document.createElement('p')
           sub.textContent = 'Hier vindt u alle cursussen binnen de oba.'
@@ -244,6 +332,15 @@ const render = {
           container1.appendChild(divP)
           divP.appendChild(div2)
           div1.appendChild(title1)
+          title1.appendChild(c)
+          title1.appendChild(u)
+          title1.appendChild(r)
+          title1.appendChild(s)
+          title1.appendChild(uu)
+          title1.appendChild(ss)
+          title1.appendChild(sss)
+          title1.appendChild(e)
+          title1.appendChild(n)
           div1.appendChild(sub)
 
     return courses.forEach((course) => {
