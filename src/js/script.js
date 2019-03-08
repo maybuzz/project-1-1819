@@ -36,7 +36,7 @@ const api = {
     render.onload()
 
     const oba = new API()
-    const bookStream = await oba.createStream("search/for+dummies&facet=type(book)&facet=language(dut)&librarian=true{100}")
+    const bookStream = await oba.createStream("search/for+dummies&facet=type(book)&facet=language(dut)&librarian=true{50}")
 
     bookStream
       .pipe(data.formatBooks)
