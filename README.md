@@ -10,7 +10,7 @@ Oba (public library of Amsterdam) "for dummies". An environment for the "for dum
 - [Install](#Install)   
 - [Concept](#Concept)   
 - [Features](#Features)   
-- [API](#API)   
+- [Code](#Code)   
 - [To-do](#To-do)   
 - [Resources](#Resources)   
 - [Credits](#Credits)
@@ -40,10 +40,13 @@ I wanted to combine the two previous courses (css-to-the-rescue and web-app-from
   - link to the website to book the course
 - `textContent` -> to generate HTML
 - `async... await` -> to connect to  the API
-- `.createStream` and `.pipe` -> to handle the requests and send them to the right module.
+- `.createStream` and `.pipe` -> to handle the requests and send them to the right module
+- `?`, `:` -> to check the data coming from the api
+- `localStorage` -> to save all the data, saves time and unnecessarily APIcalls. Using prefixes to locate different items in storage.
+- `loading state`
+- `error state`
 
-
-## API
+## Code
 For this project [Wouter Lem](@maanlamp) wrote a wrapper to make working with the API would be a bit easier. At first this still was a bit confusing.
 
 This code shows my request to the API to collect all the books.
@@ -76,6 +79,48 @@ const api = {
 
 Here you can see my `async... await` function. The async part is the API connection, the await part is where I create my stream and add my facets. This part will wait till the API is connected before it will try to get data. If it didn't wait it would crash because it will try to get data before it's connected.
 
+This is a highlight of my search url. First I look for everything with the titel "for dummies", next I filter all the books; dutch books in this case. Last but not least I define the amount of results I'd like to get.
+
+```js
+const bookStream = await oba.createStream("search/for+dummies&facet=type(book)&facet=language(dut)&librarian=true{500}")
+```
+
+This code shows how I format my data the right way and save it to localStorage.
+```js
+const data = {
+  // The parameter 'bookStream' comes from the api object. This contains all the data collected from the api
+  formatBooks: function (bookStream) {
+    const allBooks = []
+    // mapping through the data to create objects for each book
+    const allData = bookStream.map((book) => {
+      // Here I define all the data I want to collect and use throughout the app
+      const data = {
+        title: book.titles.title._attributes['search-term'].split('voor')[0].trim(),
+        cover: book.coverimages.coverimage[0] ? book.coverimages.coverimage[0]._text : 'https://v19.nbc.bibliotheek.nl/thumbnail?uri=http://data.bibliotheek.nl/ggc/ppn/417724462&token=c1322402',
+        author: book.authors ? book.authors['main-author']._attributes['search-term'] : 'unknown',
+        summary: book.summaries ? book.summaries.summary._text : 'unknown.',
+        year: book.publication.year ? book.publication.year['_text'] : 'unknown'
+      }
+
+      // Push all the formatted data in the empty array
+      allBooks.push(data)
+
+      return data
+
+    })
+
+    // Save the allBooks array in localStorage
+    // This way I don't have to do an APIcall everytime I want data
+    // Here I set my items to localStorage with a prefix 'books'
+    window.localStorage.setItem('books',JSON.stringify(allBooks))
+
+    // This is from my render function
+    // Here I get my items from localStorage using the prefix 'books'
+    const books = JSON.parse(localStorage.getItem('books'))
+  }
+}
+```
+
 ## To-do
 - [x] Connect to API   
 - [x] Book page   
@@ -85,6 +130,8 @@ Here you can see my `async... await` function. The async part is the API connect
 - [ ] Add external API   
 - [ ] Switch language in book request   
   - [ ] to english   
+- [ ] Add more crazy animations and transitions   
+- [ ] The finishing touch   
 
 ## Resources
 - [Zoekmachine](https://zoeken.oba.nl/)   
